@@ -241,7 +241,7 @@ impl Docker {
         &self,
         endpoint: &str,
     ) -> Result<String> {
-        print!("url : {}\n == data == {:?}\n\n", endpoint, body);
+        print!("url : {}\n\n", endpoint);
         self.transport
             .request(Method::GET, endpoint, Payload::None, Headers::None)
             .await
@@ -251,7 +251,7 @@ impl Docker {
         &self,
         endpoint: &str,
     ) -> Result<T> {
-        print!("url : {}\n == data == {:?}\n\n", endpoint, body);
+        print!("url : {}\n\n", endpoint);
         let raw_string = self
             .transport
             .request(Method::GET, endpoint, Payload::None, Headers::None)
@@ -291,7 +291,6 @@ impl Docker {
         T: serde::de::DeserializeOwned,
         B: Into<Body>,
     {
-        print!("url : {}\n == data == {:?}\n\n", endpoint, body);
         let string = self
             .transport
             .request(Method::POST, endpoint, body, Headers::None)
@@ -311,7 +310,6 @@ impl Docker {
         B: Into<Body>,
         H: IntoIterator<Item = (&'static str, String)> + 'a,
     {
-        print!("url : {}\n == data == {:?}\n\n", endpoint, body);
         let string = self
             .transport
             .request(Method::POST, endpoint, body, headers)
